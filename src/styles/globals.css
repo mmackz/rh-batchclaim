@@ -1,0 +1,95 @@
+html,
+body,
+body > div:first-child,
+div#__next,
+div#__next > div {
+   height: 100%;
+   min-height: calc(100vh - var(--vh-offset, 0px));
+   /* enable vh fix */
+}
+
+html {
+   font-size: 18px;
+}
+
+body {
+   position: relative;
+   min-height: calc(100vh - var(--vh-offset, 0px));
+}
+
+body::after {
+   content: "";
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: calc(100vh - var(--vh-offset, 0px));
+   min-height: 200px;
+   background: radial-gradient(
+      83.85% 115.46% at 51.36% 0.62%,
+      rgb(58, 68, 151) 0%,
+      rgb(27, 20, 105) 39.06%,
+      rgb(19, 1, 57) 59.9%,
+      rgb(5, 1, 11) 83.85%
+   );
+   z-index: -1;
+}
+
+::-webkit-scrollbar {
+   background: transparent;
+   width: 0.25rem;
+}
+
+::-webkit-scrollbar-thumb {
+   background: rgba(1, 1, 121, 0.641);
+   border-radius: 1rem;
+}
+
+/* media queries */
+@media (max-width: 1080px) {
+   html {
+      font-size: 16px;
+   }
+}
+
+@media (max-width: 900px) {
+   html {
+      font-size: 0.95rem;
+   }
+}
+
+@media (max-width: 768px) {
+   html {
+      font-size: 0.9rem;
+   }
+}
+
+@media (max-width: 640px) {
+   html {
+      font-size: 0.85rem;
+   }
+}
+
+@media (max-width: 550px) {
+   html {
+      font-size: 0.8rem;
+   }
+}
+
+@media (max-width: 480px) {
+   html {
+      font-size: 0.75rem;
+   }
+}
+
+@media (max-width: 392px) {
+   html {
+      font-size: 0.7rem;
+   }
+}
+
+@media (max-width: 331px) {
+   html {
+      font-size: 0.675rem;
+   }
+}
