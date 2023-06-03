@@ -4,8 +4,7 @@ body > div:first-child,
 div#__next,
 div#__next > div {
    height: 100%;
-   min-height: calc(100vh - var(--vh-offset, 0px));
-   /* enable vh fix */
+   min-height: 100dvh;
 }
 
 html {
@@ -14,7 +13,7 @@ html {
 
 body {
    position: relative;
-   min-height: calc(100vh - var(--vh-offset, 0px));
+   min-height: 100dvh;
 }
 
 body::after {
@@ -23,7 +22,7 @@ body::after {
    top: 0;
    left: 0;
    width: 100%;
-   height: calc(100vh - var(--vh-offset, 0px));
+   height: 100dvh;
    min-height: 200px;
    background: radial-gradient(
       83.85% 115.46% at 51.36% 0.62%,

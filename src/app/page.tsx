@@ -8,10 +8,6 @@ function Page() {
       <>
          <Header/>
          <div style={{fontSize: "2rem", color: "White"}}> Some Stuff Written Here</div>
-         <Script
-            src="https://unpkg.com/vh-check/dist/vh-check.min.js"
-            onLoad={() => vhCheck()}
-         />
       </>
    );
 }
