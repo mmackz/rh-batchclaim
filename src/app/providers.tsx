@@ -19,6 +19,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
                "--ck-connectbutton-hover-background": "hsla(0, 0%, 100%, 0.11)",
                "--ck-connectbutton-active-background": "hsla(0, 0%, 100%, 0.15)"
             }}
+            options={{ initialChainId: 0 }}
          >
             {mounted && children}
          </ConnectKitProvider>
