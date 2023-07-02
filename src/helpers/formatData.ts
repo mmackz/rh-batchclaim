@@ -2,7 +2,7 @@ import getUsdPrices from "./getUsdPrices";
 
 async function formatData(data) {
    const usdValues = await getUsdPrices(data);
-
+   console.log(data);
    return {
       eth_price: usdValues.find((value) => value.id === "ethereum").usdValue,
       data: data.map((reward) => ({
@@ -15,7 +15,7 @@ async function formatData(data) {
          reward: {
             network: reward.nftReceipt.network,
             icon: reward.quest.rewards[0].s3Link,
-            amount: reward.nftReceipt.tokenAmount / 10 ** 18,
+            amount: reward.nftReceipt.tokenAmount / 10 ** reward.quest.rewards[0].decimals,
             token: {
                name: reward.quest.rewards[0].token,
                symbol: reward.quest.rewards[0].tokenSymbol,
