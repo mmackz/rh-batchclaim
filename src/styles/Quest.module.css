@@ -1,0 +1,47 @@
+.quest {
+   background-color: #f9f9f9;
+   border-radius: 8px;
+   padding: 1rem;
+   min-width: 220px;
+   max-width: 240px;
+   cursor: pointer;
+   transition: background-color 0.3s;
+}
+
+.quest.selected {
+   background-color: #cce4f7; /* a subtle blue */
+}
+
+.quest:hover {
+   transform: scale(1.02);
+}
+
+.description {
+   display: flex;
+   justify-content: space-around;
+}
+
+.quest-icon {
+   width: 2.5rem;
+   height: 2.5rem;
+}
+
+.reward-info {
+   margin-left: 0.25rem;
+   font-size: 0.95rem;
+}
+
+.reward {
+   display: flex;
+   align-items: center;
+   gap: 0.25rem;
+}
+
+.reward > img {
+   transform: translateY(-1px);
+}
+
+.title {
+   margin-top: 0.5rem;
+   font-size: 1rem;
+}

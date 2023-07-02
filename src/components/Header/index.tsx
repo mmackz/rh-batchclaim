@@ -1,5 +1,6 @@
 "use client";
 import { ConnectKitButton } from "@/components/wagmi/ConnectKitButton";
+import SwitchChains from "../SwitchChains";
 import rhlogo from "@/public/images/rh-logo.svg";
 import rhlogo_sm from "@/public/images/rh-logo-sm.svg";
 import Image from "next/image";
@@ -31,8 +32,9 @@ function Header(props) {
                   />
                </div>
             </div>
-
+            
             <div className={`${styles["header-container"]} ${styles["header-right"]}`}>
+               <SwitchChains />
                <div className={styles["connect-button"]} >
                   <ConnectKitButton />
                </div>

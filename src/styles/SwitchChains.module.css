@@ -1,0 +1,108 @@
+.container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 0.25rem;
+   min-width: 8.35rem;
+   padding: 0.425rem 0.75rem;
+   border: 2px solid rgba(255, 255, 255, 0.11);
+   background: hsla(0, 0%, 100%, 0.05);
+   border-radius: 0.5rem;
+}
+
+.container:hover {
+   background: hsla(0, 0%, 100%, 0.11);
+}
+
+.outer {
+   position: relative;
+}
+
+.logo {
+   border-radius: 50%;
+}
+
+.text {
+   color: #f2f2f2;
+   font-size: 0.875rem;
+   transform: translateY(1px);
+   margin-left: 0.15rem;
+   margin-right: 0.35rem;
+}
+
+.arrow {
+   height: 0.5rem;
+   width: 0.5rem;
+   border-bottom: 2px solid white;
+   border-right: 2px solid white;
+   transform: translateY(-2px) rotate(45deg);
+   transition: transform linear 0.25s;
+}
+
+.active {
+   transform: translateY(2px) rotate(-135deg);
+}
+
+.dropdown {
+   position: absolute;
+   top: 3rem;
+   padding: 0.5rem 1rem;
+   border: 2px solid rgba(255, 255, 255, 0.11);
+   border-radius: 0.5rem;
+   background: #cacaca33;
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+   visibility: hidden; /* Instead of display: none */
+   opacity: 0;
+   transform: translateY(-1rem);
+   transition: transform 0.5s, opacity 0.5s linear, visibility 0.5s linear; 
+}
+
+.dropdown.open {
+   visibility: visible; /* Instead of display: flex */
+   opacity: 1;
+   transform: translateY(0);
+}
+
+
+.dropdown-item {
+   position: relative;
+   display: flex;
+   gap: 0.5rem;
+   cursor: pointer;
+}
+
+.dropdown-item > .text {
+   transform: translateY(-1px);
+   color: #afafaf;
+   cursor: pointer;
+}
+
+.dropdown-item > .text:hover {
+   color: #f2f2f2;
+}
+
+.dropdown-item.selected::after {
+   content: "";
+   position: absolute;
+   height: 0.275rem;
+   width: 0.275rem;
+   background-color: rgb(18, 244, 18);
+   right: -0.5rem;
+   top: 50%;
+   transform: translateY(-50%);
+   border-radius: 50%;
+   box-shadow: 0 0 5px rgb(18, 244, 18);
+   animation: glow 2s infinite;
+}
+
+@keyframes glow {
+   0%,
+   100% {
+      box-shadow: 0 0 5px rgb(18, 244, 18), 0 0 10px rgb(18, 244, 18);
+   }
+   50% {
+      box-shadow: 0 0 20px rgb(18, 244, 18), 0 0 30px rgb(18, 244, 18);
+   }
+}

@@ -1,13 +1,18 @@
 "use client";
-
-import Script from "next/script";
 import Header from "@/components/Header";
+import RewardList from "@/components/RewardList";
+import { useAccount } from "wagmi";
 
 function Page() {
+
+   const { address, isConnected } = useAccount();
+
    return (
       <>
          <Header/>
-         <div style={{fontSize: "2rem", color: "White"}}> Some Stuff Written Here</div>
+         { isConnected && <RewardList address={address} /> }
+         
+         
       </>
    );
 }
