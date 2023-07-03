@@ -2,7 +2,7 @@ import getUsdPrices from "./getUsdPrices";
 
 async function formatData(data) {
    const usdValues = await getUsdPrices(data);
-   console.log(data);
+
    return {
       eth_price: usdValues.find((value) => value.id === "ethereum").usdValue,
       data: data.map((reward) => ({

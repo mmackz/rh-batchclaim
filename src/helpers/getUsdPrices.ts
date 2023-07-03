@@ -1,3 +1,5 @@
+import cache from "memory-cache";
+
 function getNetwork(network: string): string | null {
    switch (network) {
       case "opt-mainnet":
@@ -12,8 +14,28 @@ function getNetwork(network: string): string | null {
 }
 
 async function getUsdPrices(data) {
-   const res = await fetch("https://api.coingecko.com/api/v3/coins/list");
-   const coinGeckoIds = await res.json();
+   const coinGeckoIds = {
+      WETH: "weth",
+      ETH: "ethereum",
+      LDO: "lido-dao",
+      BAL: "balancer",
+      OP: "optimism",
+      rETH: "rocket-pool-eth",
+      USDC: "usd-coin"
+   };
+
+   let values = cache.get("coinGeckoValues");
+
+   if (!values) {
+      const response = await fetch(
+         `https://api.coingecko.com/api/v3/simple/price?ids=${Object.values(
+            coinGeckoIds
+         ).join()}&vs_currencies=usd`
+      );
+      values = await response.json();
+
+      cache.put("coinGeckoValues", values, 600000);
+   }
 
    const uniqueCoins = [];
 
@@ -41,17 +63,11 @@ async function getUsdPrices(data) {
    const ids = [];
    for (let item of uniqueCoins) {
       if (!item.id) {
-         item.id = coinGeckoIds.find(
-            (x) => x.symbol.toLowerCase() === item.symbol.toLowerCase()
-         ).id;
+         item.id = coinGeckoIds[item.symbol];
       }
       ids.push(item.id);
    }
 
-   const response = await fetch(
-      `https://api.coingecko.com/api/v3/simple/price?ids=ethereum,${ids.join()}&vs_currencies=usd`
-   );
-   const values = await response.json();
    uniqueCoins.push({ id: "ethereum" });
    return uniqueCoins.map((coin) => ({ ...coin, usdValue: values[coin.id].usd }));
 }
