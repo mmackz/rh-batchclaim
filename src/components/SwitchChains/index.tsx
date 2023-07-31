@@ -1,4 +1,4 @@
-import { useNetwork, useSwitchNetwork } from "wagmi";
+import { useNetwork, useSwitchNetwork } from "@/modules/wagmi/dist/index";
 import { useState, useEffect, useRef } from "react";
 import styles from "@/styles/SwitchChains.module.css";
 import Image from "next/image";

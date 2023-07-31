@@ -1,4 +1,4 @@
-import { createConfig, configureChains } from "wagmi";
+import { createConfig, configureChains } from "@/modules/wagmi/dist/index";
 import { mainnet, optimism, polygon } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";

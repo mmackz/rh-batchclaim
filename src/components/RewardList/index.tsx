@@ -1,6 +1,6 @@
 "use client";
 
-import { useContractWrite, useNetwork, useWaitForTransaction } from "wagmi";
+import { useContractWrite, useNetwork, useWaitForTransaction } from "@/modules/wagmi/dist/index";
 import { useEffect, useState } from "react";
 import Overlay from "../Overlay";
 import getGasCost from "helpers/getGasPrice";
@@ -141,10 +141,10 @@ function RewardList({ address }) {
             USD
          </div>
          <div style={{ color: "white" }}>
-            Total Value of Selected Rewards: ${unclaimedRewards} USD
+            Total Value of Rewards: ${unclaimedRewards} USD
          </div>
          <div style={{ color: "white" }}>
-            Gas Cost To Claim Selected Rewards: ~${gasCostTotal} USD
+            Gas Cost To Claim Rewards: ~${gasCostTotal} USD
          </div>
          <div style={{ display: "flex", gap: "1rem" }}>
             <button onClick={chooseAll}>Choose All</button>

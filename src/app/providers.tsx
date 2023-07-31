@@ -2,7 +2,7 @@
 
 import { ConnectKitProvider } from "connectkit";
 import * as React from "react";
-import { WagmiConfig } from "wagmi";
+import { WagmiConfig } from "@/modules/wagmi/dist/index";
 
 import { config } from "../wagmi";
 
