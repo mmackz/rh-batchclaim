@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isAddress } from "viem";
 import formatData from "helpers/formatData";
-type Address = string | undefined;
+type Address = string | undefined | null;
 
 export async function GET(req: NextRequest) {
    const address: Address = req.nextUrl.searchParams.get("address");
