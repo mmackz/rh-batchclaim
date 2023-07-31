@@ -1,5 +1,12 @@
 import cache from "memory-cache";
 
+type coin = {
+   network: string | null;
+   address: string;
+   symbol: string;
+   id?: string | null;
+};
+
 function getNetwork(network: string): string | null {
    switch (network) {
       case "opt-mainnet":
@@ -37,7 +44,7 @@ async function getUsdPrices(data) {
       cache.put("coinGeckoValues", values, 600000);
    }
 
-   const uniqueCoins = [];
+   const uniqueCoins = <any[]>[];
 
    for (const item of data) {
       if (
@@ -47,7 +54,7 @@ async function getUsdPrices(data) {
                coin.address === item.quest.rewards[0].tokenContractAddress
          )
       ) {
-         const coin = {
+         const coin: coin = {
             network: getNetwork(item.quest.rewards[0].network.name),
             address: item.quest.rewards[0].tokenContractAddress,
             symbol: item.quest.rewards[0].tokenSymbol,
@@ -60,7 +67,7 @@ async function getUsdPrices(data) {
          uniqueCoins.push(coin);
       }
    }
-   const ids = [];
+   const ids: (string | null | undefined)[] = [];
    for (let item of uniqueCoins) {
       if (!item.id) {
          item.id = coinGeckoIds[item.symbol];

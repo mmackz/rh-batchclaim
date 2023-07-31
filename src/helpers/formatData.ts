@@ -4,7 +4,7 @@ async function formatData(data) {
    const usdValues = await getUsdPrices(data);
 
    return {
-      eth_price: usdValues.find((value) => value.id === "ethereum").usdValue,
+      eth_price: usdValues?.find((value) => value.id === "ethereum")?.usdValue,
       data: data.map((reward) => ({
          name: reward.quest.name,
          network: reward.quest.network,
@@ -21,9 +21,9 @@ async function formatData(data) {
                name: reward.quest.rewards[0].token,
                symbol: reward.quest.rewards[0].tokenSymbol,
                contract: reward.quest.rewards[0].tokenContractAddress,
-               usdValue: usdValues.find(
+               usdValue: usdValues?.find(
                   (value) => value.address === reward.quest.rewards[0].tokenContractAddress
-               ).usdValue
+               )?.usdValue
             }
          }
       }))

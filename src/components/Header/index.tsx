@@ -1,5 +1,5 @@
 "use client";
-import { ConnectKitButton } from "@/components/wagmi/ConnectKitButton";
+import { ConnectKitButton } from "connectkit";
 import SwitchChains from "../SwitchChains";
 import rhlogo from "@/public/images/rh-logo.svg";
 import rhlogo_sm from "@/public/images/rh-logo-sm.svg";

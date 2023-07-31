@@ -10,10 +10,17 @@ import styles from "@/styles/RewardList.module.css";
 
 import "helpers/getGasPrice";
 
+type Quest = {
+   id: string;
+   tokenId?: number;
+   contract: string;
+   chain: string;
+};
+
 function RewardList({ address }) {
-   const [quests, setQuests] = useState([]);
-   const [selectedQuests, setSelectedQuests] = useState([]);
-   const [claimedQuests, setClaimedQuests] = useState([]);
+   const [quests, setQuests] = useState<any[]>([]);
+   const [selectedQuests, setSelectedQuests] = useState<Quest[]>([]);
+   const [claimedQuests, setClaimedQuests] = useState<Quest[]>([]);
    const [gasCost, setGasCost] = useState(0);
    const [ethPrice, setETHPrice] = useState(0);
    const { chain } = useNetwork();
@@ -56,6 +63,7 @@ function RewardList({ address }) {
          }
       ],
       functionName: "claim",
+      value: BigInt(0),
       onSuccess(data) {
          console.log("Success", data);
       }
@@ -66,6 +74,7 @@ function RewardList({ address }) {
          if (quest.contract && writeAsync) {
             try {
                const { hash } = await writeAsync({
+                  // @ts-ignore
                   address: quest.contract,
                   chainId: parseInt(quest.chain)
                });
@@ -81,7 +90,7 @@ function RewardList({ address }) {
 
    const chooseAll = () => {
       setSelectedQuests(() => {
-         const selected = [];
+         const selected: any[] = [];
          for (const quest of quests) {
             selected.push({
                id: quest.questId,
@@ -99,7 +108,7 @@ function RewardList({ address }) {
 
    const unclaimedRewards = quests
       .filter(
-         (quest) => !quest.claimed && parseInt(quest.reward.network.chainId) === chain.id
+         (quest) => !quest.claimed && parseInt(quest.reward.network.chainId) === chain?.id
       )
       .reduce((a, b) => {
          return b.reward.token.usdValue * b.reward.amount + a;
@@ -109,7 +118,7 @@ function RewardList({ address }) {
    const gasCostTotal = (
       (gasCost / 10 ** 18) *
       ethPrice *
-      quests.filter((q) => !q.claimed && parseInt(q.reward.network.chainId) === chain.id)
+      quests.filter((q) => !q.claimed && parseInt(q.reward.network.chainId) === chain?.id)
          .length
    ).toFixed(2);
 
@@ -123,7 +132,7 @@ function RewardList({ address }) {
             Number Of Rewards To Claim:{" "}
             {
                quests.filter(
-                  (q) => !q.claimed && parseInt(q.reward.network.chainId) === chain.id
+                  (q) => !q.claimed && parseInt(q.reward.network.chainId) === chain?.id
                ).length
             }
          </div>
@@ -143,11 +152,11 @@ function RewardList({ address }) {
          </div>
          <div className={styles["reward-list"]}>
             {quests.filter(
-               (q) => !q.claimed && parseInt(q.reward.network.chainId) === chain.id
+               (q) => !q.claimed && parseInt(q.reward.network.chainId) === chain?.id
             ).length > 0 ? (
                quests
                   .filter(
-                     (q) => !q.claimed && parseInt(q.reward.network.chainId) === chain.id
+                     (q) => !q.claimed && parseInt(q.reward.network.chainId) === chain?.id
                   )
                   .sort(
                      (a, b) =>

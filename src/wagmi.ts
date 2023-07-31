@@ -12,6 +12,7 @@ import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY;
 const { chains, publicClient, webSocketPublicClient } = configureChains(
    [optimism, polygon],
+   // @ts-ignore
    [alchemyProvider({ apiKey, priority: 0 }), publicProvider({ priority: 1 })]
 );
 
@@ -30,7 +31,6 @@ export const config = createConfig({
       new WalletConnectConnector({
          chains,
          options: {
-            qrcode: true,
             projectId: "871a52cdf1d5b8bcb30d0490cf4ab586"
          }
       })

@@ -11,7 +11,7 @@ function SwitchChains() {
    const { chains, error, isLoading, pendingChainId, switchNetwork } = useSwitchNetwork();
    const logo = chain && chain.id === 10 ? opIcon : polygonIcon;
 
-   const outerRef = useRef();
+   const outerRef = useRef<HTMLDivElement>(null);
 
    useEffect(() => {
       function handleClickOutside(event) {
@@ -52,7 +52,7 @@ function SwitchChains() {
                         className={`${styles["dropdown-item"]} ${
                            chain?.id === 10 && styles.selected
                         }`}
-                        onClick={() => switchNetwork(10)}
+                        onClick={() => switchNetwork?.(10)}
                      >
                         <Image
                            className={styles.logo}
@@ -67,7 +67,7 @@ function SwitchChains() {
                         className={`${styles["dropdown-item"]} ${
                            chain?.id === 137 && styles.selected
                         }`}
-                        onClick={() => switchNetwork(137)}
+                        onClick={() => switchNetwork?.(137)}
                      >
                         <Image
                            className={styles.logo}
