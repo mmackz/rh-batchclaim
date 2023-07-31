@@ -11,21 +11,16 @@ function SwitchChains() {
    const { chains, error, isLoading, pendingChainId, switchNetwork } = useSwitchNetwork();
    const logo = chain && chain.id === 10 ? opIcon : polygonIcon;
 
-   // Create a ref for the outer div
    const outerRef = useRef();
 
-   // Set up the event listener
    useEffect(() => {
       function handleClickOutside(event) {
-         // If the click was outside the outer div, close the dropdown
          if (outerRef.current && !outerRef.current.contains(event.target)) {
             setOpen(false);
          }
       }
-      // Listen for clicks on the document
       document.addEventListener("mousedown", handleClickOutside);
 
-      // Cleanup the event listener when the component is unmounted
       return () => {
          document.removeEventListener("mousedown", handleClickOutside);
       };

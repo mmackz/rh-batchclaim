@@ -10,6 +10,7 @@ async function formatData(data) {
          network: reward.quest.network,
          contractAddress: reward.quest.contractAddress,
          claimed: reward.rewardClaim.isClaimed,
+         tokenId: reward.nftReceipt.tokenId,
          questId: reward.quest.id,
          questIcon: reward.quest.iconOption,
          reward: {

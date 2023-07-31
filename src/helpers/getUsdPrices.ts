@@ -69,7 +69,7 @@ async function getUsdPrices(data) {
    }
 
    uniqueCoins.push({ id: "ethereum" });
-   return uniqueCoins.map((coin) => ({ ...coin, usdValue: values[coin.id].usd }));
+   return uniqueCoins.map((coin) => ({ ...coin, usdValue: values[coin.id]?.usd }));
 }
 
 export default getUsdPrices;
