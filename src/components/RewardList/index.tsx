@@ -101,8 +101,12 @@ function RewardList({ address }) {
       setSelectedQuests(() => {
          const selected: any[] = [];
          const filteredQuests: any[] = quests.filter(
-            (q) => !q.claimed && q.reward.network.chainId === toHex(chain?.id)
+            (q) =>
+               !q.claimed &&
+               typeof chain?.id === "number" &&
+               q.reward.network.chainId === toHex(chain.id)
          );
+
          for (const quest of filteredQuests) {
             selected.push({
                id: quest.questId,
@@ -110,6 +114,8 @@ function RewardList({ address }) {
                chain: quest.reward.network.chainId
             });
          }
+         console.log(selected.length);
+         console.log(selected)
          return selected;
       });
    };
