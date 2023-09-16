@@ -43,7 +43,7 @@ function RewardList({ address }) {
 
    useEffect(() => {
       setSelectedQuests([]);
-   }, [chain])
+   }, [chain]);
 
    const handleSelect = (quest) => {
       setSelectedQuests((prev) =>
@@ -101,7 +101,7 @@ function RewardList({ address }) {
       setSelectedQuests(() => {
          const selected: any[] = [];
          const filteredQuests: any[] = quests.filter(
-            (q) => !q.claimed && q.reward.network.chainId === toHex(chain.id)
+            (q) => !q.claimed && q.reward.network.chainId === toHex(chain?.id)
          );
          for (const quest of filteredQuests) {
             selected.push({
