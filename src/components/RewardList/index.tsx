@@ -28,16 +28,22 @@ function RewardList({ address }) {
    const [claimedQuests, setClaimedQuests] = useState<Quest[]>([]);
    const [gasCost, setGasCost] = useState(0);
    const [ethPrice, setETHPrice] = useState(0);
+   const [loading, setLoading] = useState(false);
    const { chain } = useNetwork();
 
    useEffect(() => {
+      setLoading(true);
       fetch("/api/rewards?address=" + address)
          .then((response) => response.json())
          .then(({ data, eth_price }) => {
             setQuests(data);
             setETHPrice(eth_price);
+            setLoading(false);
          })
-         .catch((error) => console.log(error));
+         .catch((error) => {
+            console.log(error);
+            setLoading(false);
+         });
       getGasCost().then((gasCost) => setGasCost(gasCost));
    }, [address]);
 
@@ -115,7 +121,7 @@ function RewardList({ address }) {
             });
          }
          console.log(selected.length);
-         console.log(selected)
+         console.log(selected);
          return selected;
       });
    };
@@ -168,33 +174,38 @@ function RewardList({ address }) {
             <button onClick={chooseAll}>Choose All</button>
             <button onClick={resetChoices}>Reset</button>
          </div>
-         <div className={styles["reward-list"]}>
-            {quests.filter(
-               (q) => !q.claimed && parseInt(q.reward.network.chainId) === chain?.id
-            ).length > 0 ? (
-               quests
-                  .filter(
-                     (q) => !q.claimed && parseInt(q.reward.network.chainId) === chain?.id
-                  )
-                  .sort(
-                     (a, b) =>
-                        b.reward.token.usdValue * b.reward.amount -
-                        a.reward.token.usdValue * a.reward.amount
-                  )
-                  .map((quest) => (
-                     <Quest
-                        key={quest.questId}
-                        quest={quest}
-                        onSelect={handleSelect}
-                        selected={selectedQuests.some((q) => q.id === quest.questId)}
-                     />
-                  ))
-            ) : (
-               <div className={styles.empty}>
-                  <p>No Quests to Redeem</p>
-               </div>
-            )}
-         </div>
+         {loading ? (
+            <div className={styles.loading}><p>Loading...</p></div>
+         ) : (
+            <div className={styles["reward-list"]}>
+               {quests.filter(
+                  (q) => !q.claimed && parseInt(q.reward.network.chainId) === chain?.id
+               ).length > 0 ? (
+                  quests
+                     .filter(
+                        (q) =>
+                           !q.claimed && parseInt(q.reward.network.chainId) === chain?.id
+                     )
+                     .sort(
+                        (a, b) =>
+                           b.reward.token.usdValue * b.reward.amount -
+                           a.reward.token.usdValue * a.reward.amount
+                     )
+                     .map((quest) => (
+                        <Quest
+                           key={quest.questId}
+                           quest={quest}
+                           onSelect={handleSelect}
+                           selected={selectedQuests.some((q) => q.id === quest.questId)}
+                        />
+                     ))
+               ) : (
+                  <div className={styles.empty}>
+                     <p>No Quests to Redeem</p>
+                  </div>
+               )}
+            </div>
+         )}
       </div>
    );
 }
