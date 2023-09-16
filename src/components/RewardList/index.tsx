@@ -1,7 +1,12 @@
 "use client";
 
-import { useContractWrite, useNetwork, useWaitForTransaction } from "@/modules/wagmi/dist/index";
+import {
+   useContractWrite,
+   useNetwork,
+   useWaitForTransaction
+} from "@/modules/wagmi/dist/index";
 import { useEffect, useState } from "react";
+import { toHex } from "viem";
 import Overlay from "../Overlay";
 import getGasCost from "helpers/getGasPrice";
 import getUsdPrices from "helpers/getUsdPrices";
@@ -35,6 +40,10 @@ function RewardList({ address }) {
          .catch((error) => console.log(error));
       getGasCost().then((gasCost) => setGasCost(gasCost));
    }, [address]);
+
+   useEffect(() => {
+      setSelectedQuests([]);
+   }, [chain])
 
    const handleSelect = (quest) => {
       setSelectedQuests((prev) =>
@@ -91,7 +100,10 @@ function RewardList({ address }) {
    const chooseAll = () => {
       setSelectedQuests(() => {
          const selected: any[] = [];
-         for (const quest of quests) {
+         const filteredQuests: any[] = quests.filter(
+            (q) => !q.claimed && q.reward.network.chainId === toHex(chain.id)
+         );
+         for (const quest of filteredQuests) {
             selected.push({
                id: quest.questId,
                contract: quest.contractAddress,
