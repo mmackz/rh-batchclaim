@@ -5,7 +5,7 @@ async function formatData(data) {
 
    return {
       eth_price: usdValues?.find((value) => value.id === "ethereum")?.usdValue,
-      data: data.map((reward) => ({
+      data: data.filter((quest) => !!quest.nftReceipt.tokenId).map((reward) => ({
          name: reward.quest.name,
          network: reward.quest.network,
          contractAddress: reward.quest.contractAddress,
