@@ -15,8 +15,8 @@ const font = localFont({
 const dmSans = DM_Sans({ weight: "500", subsets: ["latin"], variable: "--address-font" });
 
 export const metadata = {
-   title: "Rabbithole Rewards Batch Claim",
-   description: "An app to batch claim Rabbithole Rewards"
+   title: "Rabbithole Receipt Rewards",
+   description: "An app to claim Rabbithole Rewards from Receipts on Optimism and Polygon"
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
